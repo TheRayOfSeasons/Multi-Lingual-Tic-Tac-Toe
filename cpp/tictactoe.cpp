@@ -30,6 +30,11 @@ struct slot
     {
         return token == empty_token;
     }
+
+    reset()
+    {
+        token = empty_token;
+    }
 };
 
 struct board
@@ -183,6 +188,37 @@ struct board
 
         return win;
     }
+
+    bool is_full()
+    {
+        int width = get_board_dimension_width();
+        int height = get_board_dimension_height();
+        int filled;
+        for(int i = 0; i < width; i++)
+        {
+            for(int j = 0; j < height; j++)
+            {
+                if(!field[i][j].is_empty())
+                {
+                    filled++;
+                }
+            }
+        }
+        return filled == width * height;
+    }
+
+    reset()
+    {
+        int width = get_board_dimension_width();
+        int height = get_board_dimension_height();
+        for(int i = 0; i < width; i++)
+        {
+            for(int j = 0; j < height; j++)
+            {
+                field[i][j].reset();
+            }
+        }
+    }
 };
 
 player toggle_player(player p)
@@ -197,26 +233,36 @@ player toggle_player(player p)
     }
 }
 
+clear_screen()
+{
+    // Make sure system is safe to use before clear screen.
+    if(system( NULL )) system("CLS");
+}
+
 main()
 {
     board game_board;
     player current_player = player_1;
     bool win = false;
+    bool draw = false;
     bool again = true;
     std::string alert_message = "";
 
-    while(!win && again)
+    while(!win && !draw && again)
     {
+        clear_screen();
+
         std::cout << "Guide\n";
         std::cout << game_board.draw(false);
         std::cout << "\n\n";
 
         std::cout << "Playing Field\n";
-        std::cout << game_board.draw(true);
+        std::cout << game_board.draw(true) << std::endl;
         std::cout << alert_message;
         std::cout << "Turn of " << current_player.name << " [" << current_player.token << "]\n";
 
         int input;
+        std::cout << "Input: ";
         std::cin >> input;
 
         bool valid_move = game_board.write_turn(current_player, input);
@@ -234,24 +280,41 @@ main()
             alert_message = "Slot " + std::to_string(input) + " is either taken or invalid.\n\n";
         }
 
-
-        if(win)
+        if(!win && game_board.is_full())
         {
+            draw = true;
+        }
+
+        if(win || draw)
+        {
+            clear_screen();
             std::cout << game_board.draw(true);
-            std::cout << current_player.name << " has won!";
+            if(win)
+            {
+                std::cout << current_player.name << " has won!\n\n";
+            }
+            if(draw)
+            {
+                std::cout << "Draw!\n\n";
+            }
 
             std::string play_again;
             std::cout << "Play again? (Y/N) : ";
             std::cin >> play_again;
 
-            if(!(play_again == "Y" || play_again == "y"))
+            if(play_again == "Y" || play_again == "y")
+            {
+                win = false;
+                again = true;
+                draw = false;
+                game_board.reset();
+            }
+            else
             {
                 win = false;
                 again = false;
+                draw = false;
             }
         }
-
-        // Make sure system is safe to use before clear screen.
-        if(system( NULL )) system("CLS");
     }
 }
