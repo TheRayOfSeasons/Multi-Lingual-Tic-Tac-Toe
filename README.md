@@ -18,3 +18,10 @@ Method 2 (with compiler):
 3. Run `g++ -std=c++11 -o tictactoe tictactoe.cpp` to compile.
 4. Run `tictactoe.exe`.
 5. Enjoy!
+
+### Python
+
+How to run:
+1. Install Python 3.8.3
+2. `cd` into the `python` directory.
+3. Run `python game.py`. If you also have python 2 installed, run `python3 game.py`.
