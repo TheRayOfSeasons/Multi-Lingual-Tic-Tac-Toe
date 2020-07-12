@@ -19,6 +19,13 @@ Method 2 (with compiler):
 4. Run `tictactoe.exe`.
 5. Enjoy!
 
+### Javascript
+
+How to run:
+1. Install `node>=v12.6.0`;
+2. `cd` into the `javascript` directory.
+3. Run `node game.js`.
+
 ### Python
 
 How to run:
