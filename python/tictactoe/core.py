@@ -1,7 +1,3 @@
-"""
-This Tic-Tac-Toe script is built to be backwards compatible with Python 2.
-"""
-
 import copy
 import re
 
