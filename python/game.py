@@ -2,14 +2,11 @@ from __future__ import absolute_import
 
 from os import name
 from os import system
-import sys
 
 from tictactoe.core import Player
 from tictactoe.core import Slot
 from tictactoe.core import Board
 
-
-sys.path.append('.tictactoe')
 
 player_1 = Player('O', 'Player 1')
 player_2 = Player('X', 'Player 2')
