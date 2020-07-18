@@ -19,6 +19,18 @@ Method 2 (with compiler):
 4. Run `tictactoe.exe`.
 5. Enjoy!
 
+### C#
+
+How to compile:
+1. Download a C# version 4.x compiler.
+2. Add the path to the compiler to your system environment variables.
+3. `cd` into the `csharp` directory.
+4. Run `csc /out:tictactoe.exe tictactoe.cs game.cs`
+
+How to run:
+1. `cd` into the `csharp` directory.
+2. Run `tictactoe.exe`.
+
 ### Javascript
 
 How to run:
